@@ -1,5 +1,20 @@
+// First, apply the publishing plugin
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.gradle.publish:plugin-publish-plugin:0.10.1"
+    }
+}
+
+// 使AS中能识别groovy
 apply plugin: 'groovy'
 apply plugin:'maven'
+//使插件发布门户网站的插件
+apply plugin: "com.gradle.plugin-publish"
 
 
 dependencies {
@@ -13,7 +28,7 @@ repositories {
     jcenter()
 }
 
-
+//本地仓库配置
 uploadArchives{
     repositories.mavenDeployer {
         repository(url: uri('../repo'))
@@ -25,5 +40,46 @@ uploadArchives{
         pom.version = '1.0.0'
     }
 
+}
+
+
+
+
+
+//pluginBundle {
+//    website = 'http://www.gradle.org/'
+//    vcsUrl = 'https://github.com/gradle/gradle'
+//    tags = ['newline', 'track']
+//}
+//
+//gradlePlugin {
+//    plugins {
+//        greetingsPlugin {
+//            id = 'com.newline.track'
+//            displayName = 'Newline Track plugin'
+//            description = 'Track android click event and insert code to record'
+//            implementationClass = 'com.newline.track.android.plugin.NewlineAutoTrackPlugin'
+//        }
+//    }
+//}
+
+
+
+//远程仓库配置
+// The configuration example below shows the minimum required properties
+// configured to publish your plugin to the plugin portal
+pluginBundle {
+    website = 'https://github.com/RealMoMo/NewlineTrack'
+    vcsUrl = 'https://github.com/RealMoMo/NewlineTrack.git'
+    description = 'Track android click event and insert code to record'
+    tags = ['newline', 'track']
+    version = '1.0.0'
+
+    plugins {
+        greetingsPlugin {
+            id = 'com.newline.track'
+            displayName = 'Newline Track plugin'
+        }
+    }
 }
 
