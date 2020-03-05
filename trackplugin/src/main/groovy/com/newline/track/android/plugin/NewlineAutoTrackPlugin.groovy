@@ -10,8 +10,21 @@ class NewlineAutoTrackPlugin implements Plugin<Project>{
 
     @Override
     void apply(Project project) {
-        NewlineTrackTransform trackTransform = new NewlineTrackTransform(project)
-        AppExtension appExtension = project.extensions.findByType(AppExtension.class)
-        appExtension.registerTransform(trackTransform)
+
+        boolean disableNewlineAutoTrackPlugin = false
+        Properties properties = new Properties()
+        if (project.rootProject.file('gradle.properties').exists()) {
+            properties.load(project.rootProject.file('gradle.properties').newDataInputStream())
+            disableNewlineAutoTrackPlugin = Boolean.parseBoolean(properties.getProperty("disableNewlineAutoTrackPlugin", "false"))
+        }
+
+        if(disableNewlineAutoTrackPlugin){
+            Logger.warn("Disable NewlineAutoTrack plugin")
+        }else{
+            NewlineTrackTransform trackTransform = new NewlineTrackTransform(project)
+            AppExtension appExtension = project.extensions.findByType(AppExtension.class)
+            appExtension.registerTransform(trackTransform)
+        }
+
     }
 }

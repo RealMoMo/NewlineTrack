@@ -52,24 +52,8 @@ class NewlineTrackTransform extends Transform {
     }
 
 
-    static void printCopyRight() {
-        println()
-        println("########################################################################")
-        println("#######                                                        #########")
-        println("#######                                                        #########")
-        println("#######     Welcome to use NewlineAutoTrack® plugin            #########")
-        println("#######     If you encounter any problems during use,          #########")
-        println("#######     please contact the newline R & D team.             #########")
-        println("#######                                                        #########")
-        println("#######                                                        #########")
-        println("#######                                                        #########")
-        println("########################################################################")
-        println("########################################################################")
-        println()
-    }
-
     @Override
     void transform(Context context, Collection<TransformInput> inputs, Collection<TransformInput> referencedInputs, TransformOutputProvider outputProvider, boolean isIncremental) throws IOException, TransformException, InterruptedException {
-        printCopyRight()
+        Logger.printCopyRight()
     }
 }
