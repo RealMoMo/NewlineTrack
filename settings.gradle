@@ -1,2 +1,2 @@
-include ':app', ':trackplugin'
+include ':app', ':trackplugin', ':sdk'
 rootProject.name='NewlineTrack'
